@@ -1,0 +1,9 @@
+Checking chapters for Project ID 5 in Table m3bzlwkrgoaxb36...
+Total records in table: 6
+Record 3 - Link: 1
+Record 4 - Link: 1
+Record 5 - Link: 1
+Record 6 - Link: 1
+Record 7 - Link: 1
+Record 8 - Link: 1
+Found 0 chapters for Project 5

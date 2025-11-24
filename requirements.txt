@@ -1,0 +1,8 @@
+streamlit
+loguru
+pydantic
+pydantic-settings
+requests
+python-dotenv
+google-generativeai
+pandas
