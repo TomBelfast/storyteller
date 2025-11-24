@@ -1,0 +1,56 @@
+=== LAST 20 VISUAL-RELATED LOGS ===
+1. [INFO] Created 1 shots for A Land Forged in Time
+2. [INFO] Planning visual story for chapter: Romans, Raiders, and Kingdoms
+3. [ERROR] AI visual story planning failed: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+4. [INFO] Created 1 shots for Romans, Raiders, and Kingdoms
+5. [INFO] Planning visual story for chapter: The Norman Conquest: A New Era
+6. [ERROR] AI visual story planning failed: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+7. [INFO] Created 1 shots for The Norman Conquest: A New Era
+8. [INFO] Planning visual story for chapter: Medieval England: Power and Plague
+9. [ERROR] AI visual story planning failed: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+10. [INFO] Created 1 shots for Medieval England: Power and Plague
+11. [INFO] Planning visual story for chapter: The Tudors: Dynasty and Reformation
+12. [ERROR] AI visual story planning failed: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+13. [INFO] Created 1 shots for The Tudors: Dynasty and Reformation
+14. [INFO] Planning visual story for chapter: Empires and Revolutions
+15. [ERROR] AI visual story planning failed: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+16. [INFO] Created 1 shots for Empires and Revolutions
+17. [INFO] Planning visual story for chapter: England's Enduring Legacy
+18. [ERROR] AI visual story planning failed: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+19. [INFO] Created 1 shots for England's Enduring Legacy
+20. [INFO] ✅ Visual planning complete!
+
+=== EXCEPTIONS ===
+Exception: HTTPError
+Value: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+--------------------------------------------------------------------------------
+Exception: HTTPError
+Value: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+--------------------------------------------------------------------------------
+Exception: HTTPError
+Value: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+--------------------------------------------------------------------------------
+Exception: HTTPError
+Value: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+--------------------------------------------------------------------------------
+Exception: HTTPError
+Value: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+--------------------------------------------------------------------------------
+Exception: HTTPError
+Value: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+--------------------------------------------------------------------------------
+Exception: HTTPError
+Value: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+--------------------------------------------------------------------------------
+Exception: HTTPError
+Value: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+--------------------------------------------------------------------------------
+Exception: HTTPError
+Value: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+--------------------------------------------------------------------------------
+Exception: HTTPError
+Value: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+--------------------------------------------------------------------------------
+Exception: HTTPError
+Value: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/chat/completions
+--------------------------------------------------------------------------------

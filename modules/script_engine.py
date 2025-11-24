@@ -11,7 +11,7 @@ class ScriptEngine:
     def __init__(self):
         self.api_key = settings.OPENROUTER_API_KEY
         self.base_url = "https://openrouter.ai/api/v1/chat/completions"
-        self.model = "google/gemini-2.0-flash-001" # Or similar available model
+        self.model = "google/gemini-2.5-flash"
 
     @ai_supervisor()
     def generate_scripts(self, project_id: str, research_data: str, target_duration: int = 3) -> List[Chapter]:

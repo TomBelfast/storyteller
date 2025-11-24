@@ -1,4 +1,0 @@
-﻿Adding 'TTS Audio' field to table mipeq0qjuo0h3xb...
-Payload: {'title': 'TTS Audio', 'column_name': 'TTS Audio', 'uidt': 'Attachment', 'system': False}
-Response status: 422
-Error: 'charmap' codec can't encode character '\u274c' in position 0: character maps to <undefined>

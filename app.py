@@ -134,7 +134,19 @@ with tab_library:
         
         # Project Details Selector
         project_options = {f"{s['id']}: {s['topic']}": s['id'] for s in stories}
-        selected_option = st.selectbox("Select Project to View Details", options=list(project_options.keys()))
+        col_sel, col_del = st.columns([4, 1], vertical_alignment="bottom")
+        with col_sel:
+            selected_option = st.selectbox("Select Project to View Details", options=list(project_options.keys()))
+        
+        with col_del:
+            if selected_option:
+                if st.button("🗑️ Delete", key="main_del_btn", type="primary", help="Delete the selected project", use_container_width=True):
+                    sel_id = project_options[selected_option]
+                    from services import delete_story
+                    delete_story(sel_id)
+                    st.success("Project deleted!")
+                    time.sleep(0.5)
+                    st.rerun()
         
         if selected_option:
             selected_id = project_options[selected_option]
@@ -585,21 +597,64 @@ with tab_library:
 
                     # Step 1: Plan Shots
                     if st.button("Plan Visuals (Generate Prompts)", key=f"plan_vis_{story['id']}"):
+                        # Initialize log storage in session state
+                        if f"visual_logs_{story['id']}" not in st.session_state:
+                            st.session_state[f"visual_logs_{story['id']}"] = []
+                        
+                        # Custom sink that stores to session_state
+                        def persistent_sink(message):
+                            st.session_state[f"visual_logs_{story['id']}"].append(message)
+                        
+                        handler_id = logger.add(persistent_sink, format="{time:HH:mm:ss} | {level} | {message}")
+                        
                         with st.spinner("Planning Shots..."):
                             try:
+                                # Debug API key
+                                import os
+                                api_key = os.getenv("OPENROUTER_API_KEY")
+                                if not api_key:
+                                    st.error("❌ OPENROUTER_API_KEY not found in environment!")
+                                    logger.error("Missing OPENROUTER_API_KEY")
+                                else:
+                                    logger.info(f"API Key loaded: {api_key[:10]}...{api_key[-4:]}")
+                                
                                 proj = get_project_obj(story)
-                                # Call plan_shots directly
-                                updated_chapters = st.session_state.pipeline.visual_director.plan_shots(proj.chapters)
+                                # Call plan_shots directly with audio timestamps
+                                audio_timestamps = story.get('audio_timestamps')
+                                logger.info(f"Starting visual planning with {len(proj.chapters)} chapters")
+                                
+                                updated_chapters = st.session_state.pipeline.visual_director.plan_shots(
+                                    proj.chapters, 
+                                    audio_timestamps=audio_timestamps
+                                )
                                 
                                 # Save planned shots to DB immediately
                                 chapters_data = [c.dict() for c in updated_chapters]
                                 db.save_chapters(story['id'], chapters_data)
-                                st.success("Visuals Planned! You can now edit prompts below.")
+                                logger.info("✅ Visual planning complete!")
+                                
+                                # Show summary
+                                total_shots = sum(len(c.shots) for c in updated_chapters)
+                                st.success(f"✅ Visuals Planned! Created {total_shots} shots across {len(updated_chapters)} chapters")
+                                
                                 time.sleep(1)
+                                logger.remove(handler_id)
                                 st.rerun()
+                                
                             except Exception as e:
-                                st.error(f"Planning failed: {e}")
-                                logger.exception("Visual planning failed")
+                                st.error(f"❌ Planning failed: {e}")
+                                logger.error(f"Full error details: {str(e)}")
+                                logger.exception("Visual planning exception:")
+                                logger.remove(handler_id)
+                                
+                    # Show logs if they exist
+                    if f"visual_logs_{story['id']}" in st.session_state and st.session_state[f"visual_logs_{story['id']}"]:
+                        with st.expander("📋 Visual Planning Logs", expanded=True):
+                            log_text = "".join(st.session_state[f"visual_logs_{story['id']}"][-50:])  # Last 50 lines
+                            st.code(log_text, language="text")
+                            if st.button("Clear Logs", key=f"clear_vis_logs_{story['id']}"):
+                                st.session_state[f"visual_logs_{story['id']}"] = []
+                                st.rerun()
 
                     # Step 2: Edit Prompts & Generate
                     current_chapters = db.get_chapters(story['id'])

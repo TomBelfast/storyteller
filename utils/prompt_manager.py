@@ -34,7 +34,33 @@ Requirements:
 - Focus: Create a smooth, continuous narrative
 - Output: ONLY the spoken narration text that flows naturally. No titles, no markers, no "Chapter X".""",
 
-    "visual_comfy_template": """Cinematic shot of {title}, detailed, 8k, {visual_desc}"""
+    "visual_comfy_template": """Cinematic shot of {title}, detailed, 8k, {visual_desc}""",
+    
+    "visual_scene_planner": """You are a visual director for a documentary. Your task is to plan visual scenes that match the narrator's audio.
+
+FULL CHAPTER CONTEXT:
+Title: {chapter_title}
+Full Narration: {full_content}
+
+CURRENT SEGMENT:
+Time: {start_time:.1f}s - {end_time:.1f}s
+Narrator says: "{segment_text}"
+
+VISUAL CONTINUITY:
+Previous scene: {previous_scene}
+
+Create a DETAILED visual description for this {duration:.1f}-second segment. The visual should:
+1. Directly illustrate what the narrator is saying
+2. Be cinematically interesting and dynamic
+3. Flow naturally from the previous scene
+4. Be suitable for AI image generation (specific, concrete visual elements)
+
+Return ONLY a JSON object:
+{{
+    "visual_description": "Detailed scene description for AI image generator",
+    "shot_type": "wide/medium/close-up/etc",
+    "mood": "atmospheric descriptor"
+}}"""
 }
 
 class PromptManager:
